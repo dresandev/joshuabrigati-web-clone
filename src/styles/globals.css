@@ -1,0 +1,12 @@
+:root {
+	--color-bg: hsl(214 28% 5%);
+	--color-text: hsl(0 0% 100%);
+
+	--font-primary: "Silka";
+}
+
+body {
+	font-family: var(--font-primary);
+	color: var(--color-text);
+	background-color: var(--color-bg);
+}
