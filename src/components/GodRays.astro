@@ -1,0 +1,86 @@
+<div class="wrapper">
+	<div class="wrapper-inner">
+		<div class="stripes-left">
+			<div class="stripes-right"></div>
+		</div>
+	</div>
+</div>
+
+<style>
+	.wrapper {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+	}
+
+	.wrapper-inner {
+		position: absolute;
+		inset-inline-start: 50%;
+		inset-block-start: 50%;
+		block-size: 100vh;
+		min-block-size 432px;
+		inline-size: 100%;
+		min-inline-size: 768px;
+		transform: translate(-50%, -50%);
+		mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+	}
+
+	.stripes-left {
+		--stripes: repeating-linear-gradient(
+			110deg,
+			var(--color-bg) 0%,
+			var(--color-bg) 7%,
+			transparent 10%,
+			transparent 12%,
+			var(--color-bg) 16%
+		);
+		--rainbow: repeating-linear-gradient(
+			110deg,
+			hsl(213 94% 68%) 10%,
+			hsl(292 91% 73%) 15%,
+			hsl(213 94% 68%) 20%,
+			hsl(171 77% 64%) 25%,
+			hsl(213 94% 68%) 30%
+		);
+		position: absolute;
+		inset: -10px;
+		filter: blur(15px);
+		opacity: 0.1;
+		background-image: var(--stripes), var(--rainbow);
+		background-size: 120%, 200%;
+		background-position:
+			50% 50%,
+			50% 50%;
+	}
+
+	.stripes-right {
+		position: absolute;
+		block-size: 100vh;
+		inline-size: 300%;
+		background-image: var(--stripes), var(--rainbow);
+		background-size: 100%, 100%;
+		background-position: 50% 50%;
+		mix-blend-mode: difference;
+		animation: god-rays 60s cubic-bezier(0.15, 0, 0.85, 1) infinite alternate;
+	}
+
+	@keyframes god-rays {
+		0% {
+			transform: translateX(0);
+		}
+
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	@keyframes god-rays {
+		0% {
+			transform: translateX(0);
+		}
+
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+</style>
