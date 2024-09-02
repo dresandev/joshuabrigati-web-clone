@@ -10,3 +10,7 @@ body {
 	color: var(--color-text);
 	background-color: var(--color-bg);
 }
+
+main {
+	isolation: isolate;
+}
