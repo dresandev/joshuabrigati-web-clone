@@ -1,5 +1,7 @@
 ---
-import AppBackground from "~/components/AppBackground.astro"
+import AnimatedGrid from "~/components/AnimatedGrid.astro"
+import GodRays from "~/components/GodRays.astro"
+import BackgroundNoise from "~/components/BackgroundNoise.astro"
 import "~/styles/reset.css"
 import "~/styles/globals.css"
 
@@ -99,10 +101,12 @@ const {
 		</style>
 	</head>
 	<body>
-		<AppBackground />
+		<AnimatedGrid />
+		<GodRays />
 		<main>
 			<slot />
 		</main>
+		<BackgroundNoise />
 	</body>
 </html>
 
