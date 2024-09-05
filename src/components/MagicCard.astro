@@ -2,6 +2,7 @@
 	<div class="radial-mask"></div>
 	<div class="background-color"></div>
 	<div class="shine-bg"></div>
+	<canvas id="particle-canvas" width="1800" height="100"></canvas>
 </div>
 
 <style>
@@ -54,3 +55,73 @@
 		background-color: hsl(0 0% 0% / 0.75);
 	}
 </style>
+
+<script>
+	import { $ } from "~/lib/dom-selector"
+	import { getRandomNumber } from "~/lib/random-number"
+
+	const canvas = $("#particle-canvas") as HTMLCanvasElement
+	const ctx = canvas.getContext("2d")!
+	const particlesArray: Particle[] = []
+
+	class Particle {
+		size: number
+		x: number
+		y: number
+		speedY: number
+		speedX: number
+		opacity: number
+
+		constructor() {
+			this.size = getRandomNumber(2, 4)
+			this.x = Math.random() * canvas.width
+			this.y = canvas.height + this.size
+			this.speedY = getRandomNumber(0.05, 0.15)
+			this.speedX = getRandomNumber(-0.4, 0.4)
+			this.opacity = 0.5
+		}
+
+		update() {
+			this.y -= this.speedY
+			this.x += this.speedX
+			if (this.y < canvas.height * 0.5) {
+				this.opacity -= 0.01
+			}
+		}
+
+		draw() {
+			ctx.fillStyle = `hsl(266 98% 66% / ${this.opacity})`
+			ctx.beginPath()
+			ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+			ctx.closePath()
+			ctx.fill()
+		}
+	}
+
+	function handleParticles() {
+		for (let i = 0; i < particlesArray.length; i++) {
+			particlesArray[i].update()
+			particlesArray[i].draw()
+
+			if (particlesArray[i].opacity <= 0) {
+				particlesArray.splice(i, 1)
+				i--
+			}
+		}
+	}
+
+	function createParticles() {
+		if (particlesArray.length < 8) {
+			particlesArray.push(new Particle())
+		}
+	}
+
+	function animate() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
+		handleParticles()
+		createParticles()
+		requestAnimationFrame(animate)
+	}
+
+	animate()
+</script>
