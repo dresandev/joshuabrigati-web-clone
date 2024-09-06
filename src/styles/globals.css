@@ -1,8 +1,16 @@
 :root {
+	--color-bg: hsl(255 7% 88%);
+	--color-text: hsl(216 28% 7%);
+	--font-primary: "Silka";
+	--grid-line-color: hsl(0 0% 0% / 0.161);
+	color-scheme: light;
+}
+
+[data-theme="dark"] {
 	--color-bg: hsl(214 28% 5%);
 	--color-text: hsl(0 0% 100%);
-
-	--font-primary: "Silka";
+	--grid-line-color: hsl(0 0% 100% / 0.161);
+	color-scheme: dark;
 }
 
 body {
