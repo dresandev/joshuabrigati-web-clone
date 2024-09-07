@@ -1,18 +1,35 @@
-<div class="wrapper">
-	<div class="radial-mask"></div>
-	<div class="background-color"></div>
-	<div class="shine-bg"></div>
-	<canvas id="particle-canvas" width="1800" height="100"></canvas>
+<div class="border-wrapper">
+	<div class="wrapper">
+		<div class="radial-mask"></div>
+		<div class="background-color"></div>
+		<div class="shine-bg"></div>
+		<canvas id="particle-canvas" width="1800" height="100"></canvas>
+	</div>
 </div>
 
 <style>
-	.wrapper {
-		height: 100px;
-		border: 1px solid hsl(0 0% 100% / 0.1);
-		overflow: hidden;
-		border-radius: 24px;
+	.border-wrapper {
+		position: relative;
+		padding: 1px;
 		background-color: hsl(0 0% 100% / 0.1);
-		filter: blur(0px);
+		border-radius: 24px;
+	}
+
+	html[data-theme="light"] .border-wrapper {
+		background-color: hsl(0 0% 100% / 0.6);
+	}
+
+	.wrapper {
+		position: relative;
+		block-size: 100px;
+		overflow: hidden;
+		border-radius: inherit;
+		background-color: hsl(0 0% 100% / 0.1);
+	}
+
+	html[data-theme="light"] .wrapper {
+		position: static;
+		background-color: hsl(0 0% 100% / 0.6);
 	}
 
 	.wrapper:hover {
@@ -21,8 +38,13 @@
 
 	.radial-mask {
 		position: absolute;
-		inset: 0;
+		inset: -1px;
 		background-image: radial-gradient(circle at 50% 150%, hsl(207 79% 51% / 0.17), transparent);
+	}
+
+	html[data-theme="light"] .radial-mask {
+		background-image: radial-gradient(80% 6% at 50% 103%, rgba(111, 56, 252, 0.267), transparent);
+		z-index: 2;
 	}
 
 	.shine-bg {
@@ -43,6 +65,10 @@
 		);
 	}
 
+	html[data-theme="light"] .shine-bg {
+		display: none;
+	}
+
 	.background-color {
 		position: absolute;
 		inset: -1px;
@@ -53,6 +79,14 @@
 
 	.wrapper:hover .background-color {
 		background-color: hsl(0 0% 0% / 0.75);
+	}
+
+	html[data-theme="light"] .background-color {
+		background-color: hsl(0 0% 98% / 0.7);
+	}
+
+	html[data-theme="light"] .wrapper:hover .background-color {
+		background-color: hsl(0 0% 100% / 0.3);
 	}
 </style>
 
