@@ -1,35 +1,26 @@
-<div class="border-wrapper">
-	<div class="wrapper">
-		<div class="radial-mask"></div>
-		<div class="background-color"></div>
-		<div class="shine-bg"></div>
-		<canvas id="particle-canvas" width="1800" height="100"></canvas>
-	</div>
+<div class="wrapper">
+	<div class="radial-mask"></div>
+	<div class="background-color"></div>
+	<div class="shine-bg"></div>
+	<canvas id="particle-canvas" width="1800" height="100"></canvas>
 </div>
 
 <style>
-	.border-wrapper {
-		position: relative;
-		padding: 1px;
-		background-color: hsl(0 0% 100% / 0.1);
-		border-radius: 24px;
-	}
-
-	html[data-theme="light"] .border-wrapper {
-		background-color: hsl(0 0% 100% / 0.6);
-	}
-
 	.wrapper {
+		--background-color: hsl(0 0% 100% / 0.1);
+		--border-color: hsl(0 0% 100% / 0.1);
 		position: relative;
 		block-size: 100px;
-		overflow: hidden;
-		border-radius: inherit;
-		background-color: hsl(0 0% 100% / 0.1);
+		background-color: var(--background-color);
+		border: 1px solid var(--border-color);
+		border-radius: 24px;
+		overflow: clip;
+		overflow-clip-margin: border-box 1px;
 	}
 
 	html[data-theme="light"] .wrapper {
-		position: static;
-		background-color: hsl(0 0% 100% / 0.6);
+		--background-color: hsl(0 0% 100% / 0.3);
+		--border-color: hsl(0 0% 100% / 0.6);
 	}
 
 	.wrapper:hover {
@@ -37,14 +28,16 @@
 	}
 
 	.radial-mask {
+		--radial-gradient: radial-gradient(circle at 50% 150%, hsl(207 79% 51% / 0.17), transparent);
 		position: absolute;
-		inset: -1px;
-		background-image: radial-gradient(circle at 50% 150%, hsl(207 79% 51% / 0.17), transparent);
+		inset: 0;
+		background-image: var(--radial-gradient);
 	}
 
 	html[data-theme="light"] .radial-mask {
-		background-image: radial-gradient(80% 6% at 50% 103%, rgba(111, 56, 252, 0.267), transparent);
+		--radial-gradient: radial-gradient(80% 6% at 50% 103%, hsl(257 97% 60% / 0.267), transparent);
 		z-index: 2;
+		bottom: -1px;
 	}
 
 	.shine-bg {
@@ -70,23 +63,24 @@
 	}
 
 	.background-color {
+		--background-color: hsl(240 10% 4% / 0.7);
 		position: absolute;
-		inset: -1px;
+		inset: 0;
 		border-radius: 23px;
-		background-color: hsl(240 10% 4% / 0.7);
+		background-color: var(--background-color);
 		transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.wrapper:hover .background-color {
-		background-color: hsl(0 0% 0% / 0.75);
+		--background-color: hsl(0 0% 0% / 0.75);
 	}
 
 	html[data-theme="light"] .background-color {
-		background-color: hsl(0 0% 98% / 0.7);
+		--background-color: hsl(0 0% 98% / 0.7);
 	}
 
 	html[data-theme="light"] .wrapper:hover .background-color {
-		background-color: hsl(0 0% 100% / 0.3);
+		--background-color: hsl(0 0% 100% / 0.3);
 	}
 </style>
 
