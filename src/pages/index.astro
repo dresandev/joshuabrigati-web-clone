@@ -1,11 +1,59 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "~/layouts/Layout.astro"
 import MagicCard from "~/components/MagicCard.astro"
 import ThemeSwitcher from "~/components/ThemeToggle.astro"
 ---
 
 <Layout title="Welcome to Astro.">
-	<h1>Hello world</h1>
-	<MagicCard />
-	<ThemeSwitcher />
+	<div class="grid-wrapper">
+		<MagicCard class="about">
+			<section>
+				<h1>Javier Andres (Dresan) - Frontend Developer</h1>
+				<p>
+					Soy desarrollador de software especializado en el Front-end. Disfruto aprender sobre
+					desarrollo de software en sus distintas etapas y manteniéndome al tanto de los avances en
+					IA 🥴. Actualmente, estoy profundizando mi conocimiento en el ecosistema de React, pero siempre estoy dispuesto a aprender (Vue.js) nuevas tecnologías 😉.
+				</p>
+			</section>
+		</MagicCard>
+		<MagicCard class="experience">
+			<section>
+				<h2>Experiencia</h2>
+				<ul>
+					<li>
+						<h3>Desarrollador web</h3>
+						<div>
+							<span>NTT DATA</span>
+							<span>2021 - 2022</span>
+						</div>
+					</li>
+				</ul>
+			</section>
+		</MagicCard>
+		<MagicCard class="options">
+			<ThemeSwitcher />
+		</MagicCard>
+	</div>
 </Layout>
+
+<style>
+	.grid-wrapper {
+		display: grid;
+		grid-template-areas: "about about about experience experience experience options options options";
+		/* grid-template-columns: repeat(); */
+		max-inline-size: 1200px;
+		margin-inline: auto;
+		gap: 16px;
+	}
+
+	.about {
+		grid-area: about;
+	}
+	.experience {
+		grid-area: experience;
+	}
+
+	.options {
+		grid-area: options;
+	}
+</style>

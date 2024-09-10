@@ -1,8 +1,17 @@
-<div class="wrapper">
+---
+interface Props {
+	class?: string
+}
+
+const { class: className, ...props } = Astro.props
+---
+
+<div class:list={["wrapper", className]} {...props}>
 	<div class="radial-mask"></div>
 	<div class="background-color"></div>
 	<div class="shine-bg"></div>
-	<canvas id="particle-canvas" width="1800" height="100"></canvas>
+	<canvas class="particles"></canvas>
+	<div class="content"><slot /></div>
 </div>
 
 <style>
@@ -10,12 +19,12 @@
 		--background-color: hsl(0 0% 100% / 0.1);
 		--border-color: hsl(0 0% 100% / 0.1);
 		position: relative;
-		block-size: 100px;
+		padding: 32px;
 		background-color: var(--background-color);
 		border: 1px solid var(--border-color);
 		border-radius: 24px;
 		overflow: clip;
-		overflow-clip-margin: border-box 1px;
+		overflow-clip-margin: border-box;
 	}
 
 	html[data-theme="light"] .wrapper {
@@ -68,7 +77,9 @@
 		inset: 0;
 		border-radius: 23px;
 		background-color: var(--background-color);
-		transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+		transition:
+			background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+			color 300ms cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.wrapper:hover .background-color {
@@ -82,74 +93,91 @@
 	html[data-theme="light"] .wrapper:hover .background-color {
 		--background-color: hsl(0 0% 100% / 0.3);
 	}
+
+	.particles {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+	}
+
+	.content {
+		position: relative;
+		z-index: 3;
+	}
 </style>
 
 <script>
-	import { $ } from "~/lib/dom-selector"
+	import { $$ } from "~/lib/dom-selector"
 	import { getRandomNumber } from "~/lib/random-number"
+	const canvases = $$("canvas.particles") as NodeListOf<HTMLCanvasElement>
 
-	const canvas = $("#particle-canvas") as HTMLCanvasElement
-	const ctx = canvas.getContext("2d")!
-	const particlesArray: Particle[] = []
+	canvases.forEach((canvas) => {
+		const container = canvas.parentElement!
+		const ctx = canvas.getContext("2d")!
+		const particlesArray: Particle[] = []
 
-	class Particle {
-		size: number
-		x: number
-		y: number
-		speedY: number
-		speedX: number
-		opacity: number
+		canvas.width = container.clientWidth
+		canvas.height = container.clientHeight
 
-		constructor() {
-			this.size = getRandomNumber(2, 4)
-			this.x = Math.random() * canvas.width
-			this.y = canvas.height + this.size
-			this.speedY = getRandomNumber(0.05, 0.15)
-			this.speedX = getRandomNumber(-0.4, 0.4)
-			this.opacity = 0.5
-		}
+		class Particle {
+			size: number
+			x: number
+			y: number
+			speedY: number
+			speedX: number
+			opacity: number
 
-		update() {
-			this.y -= this.speedY
-			this.x += this.speedX
-			if (this.y < canvas.height * 0.5) {
-				this.opacity -= 0.01
+			constructor() {
+				this.size = getRandomNumber(1, 3)
+				this.x = Math.random() * canvas.width
+				this.y = canvas.height + this.size
+				this.speedY = getRandomNumber(0.02, 0.12)
+				this.speedX = getRandomNumber(-0.4, 0.4)
+				this.opacity = 0.5
+			}
+
+			update() {
+				this.y -= this.speedY
+				this.x += this.speedX
+				if (this.y < canvas.height * 0.5) {
+					this.opacity -= 0.01
+				}
+			}
+
+			draw() {
+				ctx.fillStyle = `hsl(266 98% 66% / ${this.opacity})`
+				ctx.beginPath()
+				ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+				ctx.closePath()
+				ctx.fill()
 			}
 		}
 
-		draw() {
-			ctx.fillStyle = `hsl(266 98% 66% / ${this.opacity})`
-			ctx.beginPath()
-			ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-			ctx.closePath()
-			ctx.fill()
-		}
-	}
+		function handleParticles() {
+			for (let i = 0; i < particlesArray.length; i++) {
+				particlesArray[i].update()
+				particlesArray[i].draw()
 
-	function handleParticles() {
-		for (let i = 0; i < particlesArray.length; i++) {
-			particlesArray[i].update()
-			particlesArray[i].draw()
-
-			if (particlesArray[i].opacity <= 0) {
-				particlesArray.splice(i, 1)
-				i--
+				if (particlesArray[i].opacity <= 0) {
+					particlesArray.splice(i, 1)
+					i--
+				}
 			}
 		}
-	}
 
-	function createParticles() {
-		if (particlesArray.length < 8) {
-			particlesArray.push(new Particle())
+		function createParticles() {
+			if (particlesArray.length < 8) {
+				particlesArray.push(new Particle())
+			}
 		}
-	}
 
-	function animate() {
-		ctx.clearRect(0, 0, canvas.width, canvas.height)
-		handleParticles()
-		createParticles()
-		requestAnimationFrame(animate)
-	}
+		function animate() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+			handleParticles()
+			createParticles()
+			requestAnimationFrame(animate)
+		}
 
-	animate()
+		setTimeout(animate, getRandomNumber(3000, 5000))
+	})
 </script>

@@ -21,4 +21,5 @@ body {
 
 main {
 	isolation: isolate;
+	padding-inline: 16px;
 }
