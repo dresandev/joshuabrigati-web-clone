@@ -4,19 +4,23 @@ import MagicCard from "~/components/MagicCard.astro"
 import ThemeSwitcher from "~/components/ThemeToggle.astro"
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Dresan - Frontend Developer">
 	<div class="grid-wrapper">
-		<MagicCard class="about">
+		<MagicCard class="magic-card about">
 			<section>
-				<h1>Javier Andres (Dresan) - Frontend Developer</h1>
+				<div>
+					<img src="images/profile.jpg" alt="Foto de perfíl de Dresan" loading="eager" />
+					<h1>Andrés - Drésan</h1>
+				</div>
 				<p>
-					Soy desarrollador de software especializado en el Front-end. Disfruto aprender sobre
+					Desarrollador de software especializado en el Front-end. Disfruto aprender sobre
 					desarrollo de software en sus distintas etapas y manteniéndome al tanto de los avances en
-					IA 🥴. Actualmente, estoy profundizando mi conocimiento en el ecosistema de React, pero siempre estoy dispuesto a aprender (Vue.js) nuevas tecnologías 😉.
+					IA 🥴. Actualmente, estoy profundizando mi conocimiento en el ecosistema de React y
+					aprendiendo Vue.js.
 				</p>
 			</section>
 		</MagicCard>
-		<MagicCard class="experience">
+		<MagicCard class="magic-card experience">
 			<section>
 				<h2>Experiencia</h2>
 				<ul>
@@ -30,7 +34,7 @@ import ThemeSwitcher from "~/components/ThemeToggle.astro"
 				</ul>
 			</section>
 		</MagicCard>
-		<MagicCard class="options">
+		<MagicCard class="magic-card options">
 			<ThemeSwitcher />
 		</MagicCard>
 	</div>
@@ -39,21 +43,58 @@ import ThemeSwitcher from "~/components/ThemeToggle.astro"
 <style>
 	.grid-wrapper {
 		display: grid;
-		grid-template-areas: "about about about experience experience experience options options options";
-		/* grid-template-columns: repeat(); */
+		grid-template-columns: repeat(2, 1fr);
+		gap: 16px;
 		max-inline-size: 1200px;
 		margin-inline: auto;
-		gap: 16px;
 	}
 
-	.about {
-		grid-area: about;
-	}
-	.experience {
-		grid-area: experience;
+	.magic-card {
+		padding: 32px;
 	}
 
-	.options {
-		grid-area: options;
+	.about img {
+		aspect-ratio: 1;
+		border-radius: 50%;
+		block-size: 96px;
+		border: 1px solid var(--border-color);
+	}
+
+	.about h1 {
+		font-size: 36px;
+		font-weight: 500;
+	}
+
+	.about div {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		padding-block-end: 24px;
+	}
+
+	.experience h2 {
+		font-style: 24px;
+		font-weight: 500;
+		text-transform: uppercase;
+		padding-block-end: 24px;
+	}
+
+	.experience h3 {
+		font-size: 36px;
+	}
+
+	.experience ul {
+		list-style: none;
+		padding-inline-start: 0;
+	}
+
+	.experience li {
+		display: flex;
+	}
+
+	.options{
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>

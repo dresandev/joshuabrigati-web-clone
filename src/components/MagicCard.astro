@@ -19,10 +19,9 @@ const { class: className, ...props } = Astro.props
 		--background-color: hsl(0 0% 100% / 0.1);
 		--border-color: hsl(0 0% 100% / 0.1);
 		position: relative;
-		padding: 32px;
+		border-radius: 24px;
 		background-color: var(--background-color);
 		border: 1px solid var(--border-color);
-		border-radius: 24px;
 		overflow: clip;
 		overflow-clip-margin: border-box;
 	}
@@ -75,7 +74,7 @@ const { class: className, ...props } = Astro.props
 		--background-color: hsl(240 10% 4% / 0.7);
 		position: absolute;
 		inset: 0;
-		border-radius: 23px;
+		border-radius: inherit;
 		background-color: var(--background-color);
 		transition:
 			background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
@@ -128,18 +127,18 @@ const { class: className, ...props } = Astro.props
 			opacity: number
 
 			constructor() {
-				this.size = getRandomNumber(1, 3)
-				this.x = Math.random() * canvas.width
+				this.size = getRandomNumber(1, 2.5)
+				this.x = getRandomNumber(0.1, 1) * canvas.width
 				this.y = canvas.height + this.size
 				this.speedY = getRandomNumber(0.02, 0.12)
-				this.speedX = getRandomNumber(-0.4, 0.4)
+				this.speedX = getRandomNumber(-0.2, 0.2)
 				this.opacity = 0.5
 			}
 
 			update() {
 				this.y -= this.speedY
 				this.x += this.speedX
-				if (this.y < canvas.height * 0.5) {
+				if (this.y < canvas.height * 0.6) {
 					this.opacity -= 0.01
 				}
 			}
@@ -178,6 +177,6 @@ const { class: className, ...props } = Astro.props
 			requestAnimationFrame(animate)
 		}
 
-		setTimeout(animate, getRandomNumber(3000, 5000))
+		animate()
 	})
 </script>

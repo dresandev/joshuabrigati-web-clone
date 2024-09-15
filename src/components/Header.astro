@@ -1,14 +1,78 @@
-<header>
-	<nav>
-		<ul>
-			<li>
-				<a href=""></a>
-			</li>
-			<li>
-				<a href=""></a>
-			</li>
-		</ul>
-	</nav>
-</header>
+---
+import MagicCard from "~/components/MagicCard.astro"
+---
 
-<style></style>
+<MagicCard class="magic-card">
+	<header>
+		<nav>
+			<ul>
+				<li>
+					<a class="nav-link" href="/">Inicio</a>
+				</li>
+				<li>
+					<a class="nav-link" href="/projects">Proyectos</a>
+				</li>
+				<li>
+					<a class="nav-link" href="/about">Sobre mí</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+</MagicCard>
+
+<style>
+	.magic-card {
+		padding: 6px;
+		inline-size: max-content;
+		margin-inline: auto;
+		margin-block: 64px 80px;
+	}
+
+	ul {
+		display: flex;
+		gap: 4px;
+		padding-inline-start: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		block-size: 32px;
+		font-size: 14px;
+		padding: 0 32px;
+		border-radius: 50px;
+	}
+
+	a.selected {
+		background-color: hsl(0 0% 100%);
+	}
+
+	html[data-theme="dark"] a.selected {
+		background-color: hsl(215 15% 15%);
+		border: 2px hsl(212 12% 21%) solid;
+	}
+
+	a:hover {
+		opacity: 0.5;
+		transition: opacity 0.25s ease 0s;
+	}
+</style>
+
+<script>
+	import { $$ } from "~/lib/dom-selector"
+
+	const navLinks = $$(".nav-link")
+
+	navLinks.forEach((link) => {
+		const linkHref = link.getAttribute("href")
+
+		if (linkHref === window.location.pathname) {
+			link.classList.add("selected")
+		}
+	})
+</script>

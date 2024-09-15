@@ -2,18 +2,21 @@
 import AnimatedGrid from "~/components/AnimatedGrid.astro"
 import GodRays from "~/components/GodRays.astro"
 import BackgroundNoise from "~/components/BackgroundNoise.astro"
+import FollowingGradient from "~/components/FollowingGradient.astro"
+import Header from "~/components/Header.astro"
 import "~/styles/reset.css"
 import "~/styles/globals.css"
-import FollowingGradient from "~/components/FollowingGradient.astro"
 
 interface Props {
 	title: string
 	description?: string
+	displayHeader?: boolean
 }
 
 const {
 	title,
 	description = "Soy Dresan y aquí encontrarás mi portafolio, habilidades e información de contacto. Explora mi trabajo y contáctame si tienes un proyecto en mente.",
+	displayHeader = true,
 } = Astro.props
 ---
 
@@ -89,7 +92,7 @@ const {
 			@font-face {
 				font-family: "Silka";
 				font-display: swap;
-				src: url("/fonts/silka/silka-mediumwoff2") format("woff2");
+				src: url("/fonts/silka/silka-medium.woff2") format("woff2");
 				font-weight: 500;
 			}
 
@@ -105,31 +108,10 @@ const {
 		<AnimatedGrid />
 		<GodRays />
 		<FollowingGradient />
+		<BackgroundNoise />
+		{displayHeader && <Header />}
 		<main>
 			<slot />
 		</main>
-		<BackgroundNoise />
 	</body>
 </html>
-
-<script>
-	console.log(
-		"%cCuídado con la IA 🙀",
-		`background-image:linear-gradient(
-			45deg,
-			hsl(0deg 0% 7%) 0%,
-			hsl(344deg 0% 8%) 11%,
-			hsl(344deg 0% 8%) 22%,
-			hsl(344deg 0% 9%) 33%,
-			hsl(344deg 0% 9%) 44%,
-			hsl(344deg 0% 10%) 56%,
-			hsl(344deg 0% 10%) 67%,
-			hsl(344deg 0% 11%) 78%,
-			hsl(344deg 0% 11%) 89%,
-			hsl(0deg 0% 12%) 100%
-		);
-		padding: 14px 20px;
-		font: 700 1.2rem system-ui;
-		border-radius: 8px;`
-	)
-</script>

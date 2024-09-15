@@ -23,3 +23,13 @@ main {
 	isolation: isolate;
 	padding-inline: 16px;
 }
+
+::selection {
+	background-color: hsl(210 85% 46%);
+	color: hsl(0 0% 100%);
+}
+
+:focus-visible {
+	outline: 2px solid hsl(210 100% 66%);
+	outline-offset: 2px;
+}
