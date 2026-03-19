@@ -1,26 +1,25 @@
 {
-  "name": "dresan.dev",
+  "name": "temp",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "astro": "^4.15.1",
-    "typescript": "^5.5.4"
+    "astro": "^6.0.6"
   },
   "devDependencies": {
-    "astro-eslint-parser": "^1.0.2",
-    "eslint": "^9.9.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-astro": "^1.2.3",
-    "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.1"
-  },
-  "packageManager": "pnpm@9.9.0"
+    "@typescript-eslint/parser": "^8.57.1",
+    "eslint": "^10.0.3",
+    "eslint-plugin-astro": "^1.6.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.9.3"
+  }
 }

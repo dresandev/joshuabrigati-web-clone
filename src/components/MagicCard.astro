@@ -1,182 +1,182 @@
 ---
 interface Props {
-	class?: string
+  class?: string
 }
 
 const { class: className, ...props } = Astro.props
 ---
 
 <div class:list={["wrapper", className]} {...props}>
-	<div class="radial-mask"></div>
-	<div class="background-color"></div>
-	<div class="shine-bg"></div>
-	<canvas class="particles"></canvas>
-	<div class="content"><slot /></div>
+  <div class="radial-mask"></div>
+  <div class="background-color"></div>
+  <div class="shine-bg"></div>
+  <canvas class="particles"></canvas>
+  <div class="content"><slot /></div>
 </div>
 
 <style>
-	.wrapper {
-		--background-color: hsl(0 0% 100% / 0.1);
-		--border-color: hsl(0 0% 100% / 0.1);
-		position: relative;
-		border-radius: 24px;
-		background-color: var(--background-color);
-		border: 1px solid var(--border-color);
-		overflow: clip;
-		overflow-clip-margin: border-box;
-	}
+  .wrapper {
+    --background-color: hsl(0 0% 100% / 0.1);
+    --border-color: hsl(0 0% 100% / 0.1);
+    position: relative;
+    border-radius: 24px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    overflow: clip;
+    overflow-clip-margin: border-box;
+  }
 
-	html[data-theme="light"] .wrapper {
-		--background-color: hsl(0 0% 100% / 0.3);
-		--border-color: hsl(0 0% 100% / 0.6);
-	}
+  html[data-theme="light"] .wrapper {
+    --background-color: hsl(0 0% 100% / 0.3);
+    --border-color: hsl(0 0% 100% / 0.6);
+  }
 
-	.wrapper:hover {
-		box-shadow: 0 5px 24px 0 hsl(240 5% 41% / 0.1);
-	}
+  .wrapper:hover {
+    box-shadow: 0 5px 24px 0 hsl(240 5% 41% / 0.1);
+  }
 
-	.radial-mask {
-		--radial-gradient: radial-gradient(circle at 50% 150%, hsl(207 79% 51% / 0.17), transparent);
-		position: absolute;
-		inset: 0;
-		background-image: var(--radial-gradient);
-	}
+  .radial-mask {
+    --radial-gradient: radial-gradient(circle at 50% 150%, hsl(207 79% 51% / 0.17), transparent);
+    position: absolute;
+    inset: 0;
+    background-image: var(--radial-gradient);
+  }
 
-	html[data-theme="light"] .radial-mask {
-		--radial-gradient: radial-gradient(80% 6% at 50% 103%, hsl(257 97% 60% / 0.267), transparent);
-		z-index: 2;
-		bottom: -1px;
-	}
+  html[data-theme="light"] .radial-mask {
+    --radial-gradient: radial-gradient(80% 6% at 50% 103%, hsl(257 97% 60% / 0.267), transparent);
+    z-index: 2;
+    bottom: -1px;
+  }
 
-	.shine-bg {
-		position: absolute;
-		inset: -8px;
-		opacity: 0.4;
-		filter: blur(8px);
-		mask-image: radial-gradient(circle at 50% 150%, hsl(0 0 100%), transparent);
-		background-image: conic-gradient(
-			from -45deg at 50% 150%,
-			transparent 0deg,
-			hsl(263 62% 7%) 15deg,
-			transparent 30deg,
-			hsl(263 62% 7%) 45deg,
-			transparent 60deg,
-			hsl(263 62% 7%) 75deg,
-			transparent 90deg
-		);
-	}
+  .shine-bg {
+    position: absolute;
+    inset: -8px;
+    opacity: 0.4;
+    filter: blur(8px);
+    mask-image: radial-gradient(circle at 50% 150%, hsl(0 0 100%), transparent);
+    background-image: conic-gradient(
+      from -45deg at 50% 150%,
+      transparent 0deg,
+      hsl(263 62% 7%) 15deg,
+      transparent 30deg,
+      hsl(263 62% 7%) 45deg,
+      transparent 60deg,
+      hsl(263 62% 7%) 75deg,
+      transparent 90deg
+    );
+  }
 
-	html[data-theme="light"] .shine-bg {
-		display: none;
-	}
+  html[data-theme="light"] .shine-bg {
+    display: none;
+  }
 
-	.background-color {
-		--background-color: hsl(240 10% 4% / 0.7);
-		position: absolute;
-		inset: 0;
-		border-radius: inherit;
-		background-color: var(--background-color);
-		transition:
-			background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
-			color 300ms cubic-bezier(0.4, 0, 0.2, 1);
-	}
+  .background-color {
+    --background-color: hsl(240 10% 4% / 0.7);
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: var(--background-color);
+    transition:
+      background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-	.wrapper:hover .background-color {
-		--background-color: hsl(0 0% 0% / 0.75);
-	}
+  .wrapper:hover .background-color {
+    --background-color: hsl(0 0% 0% / 0.75);
+  }
 
-	html[data-theme="light"] .background-color {
-		--background-color: hsl(0 0% 98% / 0.7);
-	}
+  html[data-theme="light"] .background-color {
+    --background-color: hsl(0 0% 98% / 0.7);
+  }
 
-	html[data-theme="light"] .wrapper:hover .background-color {
-		--background-color: hsl(0 0% 100% / 0.3);
-	}
+  html[data-theme="light"] .wrapper:hover .background-color {
+    --background-color: hsl(0 0% 100% / 0.3);
+  }
 
-	.particles {
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-	}
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
 
-	.content {
-		position: relative;
-		z-index: 3;
-	}
+  .content {
+    position: relative;
+    z-index: 3;
+  }
 </style>
 
 <script>
-	import { $$ } from "~/lib/dom-selector"
-	import { getRandomNumber } from "~/lib/random-number"
-	const canvases = $$("canvas.particles") as NodeListOf<HTMLCanvasElement>
+  import { $$ } from "@/lib/dom-selector"
+  import { getRandomNumber } from "@/lib/random-number"
+  const canvases = $$("canvas.particles") as NodeListOf<HTMLCanvasElement>
 
-	canvases.forEach((canvas) => {
-		const container = canvas.parentElement!
-		const ctx = canvas.getContext("2d")!
-		const particlesArray: Particle[] = []
+  canvases.forEach((canvas) => {
+    const container = canvas.parentElement!
+    const ctx = canvas.getContext("2d")!
+    const particlesArray: Particle[] = []
 
-		canvas.width = container.clientWidth
-		canvas.height = container.clientHeight
+    canvas.width = container.clientWidth
+    canvas.height = container.clientHeight
 
-		class Particle {
-			size: number
-			x: number
-			y: number
-			speedY: number
-			speedX: number
-			opacity: number
+    class Particle {
+      size: number
+      x: number
+      y: number
+      speedY: number
+      speedX: number
+      opacity: number
 
-			constructor() {
-				this.size = getRandomNumber(1, 2.5)
-				this.x = getRandomNumber(0.1, 1) * canvas.width
-				this.y = canvas.height + this.size
-				this.speedY = getRandomNumber(0.02, 0.12)
-				this.speedX = getRandomNumber(-0.2, 0.2)
-				this.opacity = 0.5
-			}
+      constructor() {
+        this.size = getRandomNumber(1, 2.5)
+        this.x = getRandomNumber(0.1, 1) * canvas.width
+        this.y = canvas.height + this.size
+        this.speedY = getRandomNumber(0.02, 0.12)
+        this.speedX = getRandomNumber(-0.2, 0.2)
+        this.opacity = 0.5
+      }
 
-			update() {
-				this.y -= this.speedY
-				this.x += this.speedX
-				if (this.y < canvas.height * 0.6) {
-					this.opacity -= 0.01
-				}
-			}
+      update() {
+        this.y -= this.speedY
+        this.x += this.speedX
+        if (this.y < canvas.height * 0.6) {
+          this.opacity -= 0.01
+        }
+      }
 
-			draw() {
-				ctx.fillStyle = `hsl(266 98% 66% / ${this.opacity})`
-				ctx.beginPath()
-				ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-				ctx.closePath()
-				ctx.fill()
-			}
-		}
+      draw() {
+        ctx.fillStyle = `hsl(266 98% 66% / ${this.opacity})`
+        ctx.beginPath()
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.closePath()
+        ctx.fill()
+      }
+    }
 
-		function handleParticles() {
-			for (let i = 0; i < particlesArray.length; i++) {
-				particlesArray[i].update()
-				particlesArray[i].draw()
+    function handleParticles() {
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update()
+        particlesArray[i].draw()
 
-				if (particlesArray[i].opacity <= 0) {
-					particlesArray.splice(i, 1)
-					i--
-				}
-			}
-		}
+        if (particlesArray[i].opacity <= 0) {
+          particlesArray.splice(i, 1)
+          i--
+        }
+      }
+    }
 
-		function createParticles() {
-			if (particlesArray.length < 8) {
-				particlesArray.push(new Particle())
-			}
-		}
+    function createParticles() {
+      if (particlesArray.length < 8) {
+        particlesArray.push(new Particle())
+      }
+    }
 
-		function animate() {
-			ctx.clearRect(0, 0, canvas.width, canvas.height)
-			handleParticles()
-			createParticles()
-			requestAnimationFrame(animate)
-		}
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      handleParticles()
+      createParticles()
+      requestAnimationFrame(animate)
+    }
 
-		animate()
-	})
+    animate()
+  })
 </script>
