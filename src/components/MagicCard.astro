@@ -11,7 +11,9 @@ const { class: className, ...props } = Astro.props
   <div class="background-color"></div>
   <div class="shine-bg"></div>
   <canvas class="particles"></canvas>
-  <div class="content"><slot /></div>
+  <div class="content">
+    <slot />
+  </div>
 </div>
 
 <style>

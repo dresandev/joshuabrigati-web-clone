@@ -1,35 +1,35 @@
 :root {
-	--color-bg: hsl(255 7% 88%);
-	--color-text: hsl(216 28% 7%);
-	--font-primary: "Silka";
-	--grid-line-color: hsl(0 0% 0% / 0.161);
-	color-scheme: light;
+  --color-bg: hsl(255 7% 88%);
+  --color-text: hsl(216 28% 7%);
+  --font-primary: "Silka";
+  --grid-line-color: hsl(0 0% 0% / 0.161);
+  color-scheme: light;
 }
 
 [data-theme="dark"] {
-	--color-bg: hsl(214 28% 5%);
-	--color-text: hsl(0 0% 100%);
-	--grid-line-color: hsl(0 0% 100% / 0.161);
-	color-scheme: dark;
+  --color-bg: hsl(214 28% 5%);
+  --color-text: hsl(0 0% 100%);
+  --grid-line-color: hsl(0 0% 100% / 0.161);
+  color-scheme: dark;
 }
 
 body {
-	font-family: var(--font-primary);
-	color: var(--color-text);
-	background-color: var(--color-bg);
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-bg);
 }
 
 main {
-	isolation: isolate;
-	padding-inline: 16px;
+  isolation: isolate;
+  padding-inline: 16px;
 }
 
 ::selection {
-	background-color: hsl(210 85% 46%);
-	color: hsl(0 0% 100%);
+  background-color: hsl(210 85% 46%);
+  color: hsl(0 0% 100%);
 }
 
 :focus-visible {
-	outline: 2px solid hsl(210 100% 66%);
-	outline-offset: 2px;
+  outline: 2px solid hsl(210 100% 66%);
+  outline-offset: 2px;
 }

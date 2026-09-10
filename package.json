@@ -1,5 +1,5 @@
 {
-  "name": "temp",
+  "name": "components-clone",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -12,14 +12,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.0.7"
+    "astro": "7.3.2"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^8.63.0",
-    "eslint": "^10.7.0",
-    "eslint-plugin-astro": "^2.1.1",
-    "prettier": "^3.9.5",
-    "prettier-plugin-astro": "^0.14.1",
-    "typescript": "^7.0.2"
+    "@typescript-eslint/parser": "8.70.0",
+    "eslint": "10.10.0",
+    "eslint-plugin-astro": "3.1.0",
+    "prettier": "3.9.6",
+    "prettier-plugin-astro": "1.0.0"
   }
 }
